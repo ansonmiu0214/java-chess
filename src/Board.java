@@ -14,6 +14,27 @@ public class Board {
   public Board() {
     this.board = new Square[NUM_OF_ROWS][NUM_OF_ROWS];
 
+    for (int row = 0; row < NUM_OF_ROWS; ++row) {
+      for (int col = 0; col < NUM_OF_ROWS; ++col) {
+
+        // TODO optimise Board constructor
+
+        if (row == 1) {
+          // White pawns
+          board[col][row] = new Square(col, row, new Pawn(Colour.WHITE));
+
+        } else if (row == 6) {
+          // Black pawns
+          board[col][row] = new Square(col, row, new Pawn(Colour.BLACK));
+
+        } else {
+          // Blank
+          board[col][row] = new Square(col, row, null);
+        }
+
+      }
+    }
+
   }
 
   public Square getSquare(int coord_x, int coord_y) {
