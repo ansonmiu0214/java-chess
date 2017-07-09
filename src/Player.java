@@ -30,9 +30,7 @@ public class Player {
   }
 
   public Set<Move> getValidMoves() {
-    return getPieces().stream()
-            .flatMap(sq -> sq.getPiece().getValidMoves().stream())
-            .collect(Collectors.toSet());
+    return game.getBoard().getValidMoves(colour);
   }
 
   public void makeMove() {

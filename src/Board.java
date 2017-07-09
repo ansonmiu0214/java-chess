@@ -1,5 +1,6 @@
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Anson on 9/7/2017.
@@ -34,6 +35,26 @@ public class Board {
   public boolean isInBound(int coord_x, int coord_y) {
     return 0 <= coord_x && coord_x < NUM_OF_ROWS
             && 0 <= coord_y && coord_y < NUM_OF_ROWS;
+  }
+
+  public boolean isFinished() {
+    // TODO implement Board.isFinished()
+    return false;
+  }
+
+  public int getResult(Colour colour) {
+    assert(colour != null);
+
+    // TODO implement Board.getResult
+    return 0;
+  }
+
+  public Set<Move> getValidMoves(Colour colour) {
+    assert(colour != null);
+
+    return getPieces(colour).stream()
+            .flatMap(x -> x.getPiece().getValidMoves(this, x).stream())
+            .collect(Collectors.toSet());
   }
 
   public Set<Square> getPieces(Colour colour) {
