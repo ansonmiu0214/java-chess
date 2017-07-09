@@ -17,6 +17,10 @@ public class Game {
     this.current = Colour.WHITE;
   }
 
+  public Board getBoard() {
+    return board;
+  }
+
   public Colour getCurrentPlayer() {
     return current;
   }

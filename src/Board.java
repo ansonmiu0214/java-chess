@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by Anson on 9/7/2017.
  */
@@ -31,6 +34,22 @@ public class Board {
   public boolean isInBound(int coord_x, int coord_y) {
     return 0 <= coord_x && coord_x < NUM_OF_ROWS
             && 0 <= coord_y && coord_y < NUM_OF_ROWS;
+  }
+
+  public Set<Square> getPieces(Colour colour) {
+    assert(colour != null);
+
+    Set<Square> pieces = new HashSet<>();
+    for (int row = 0; row < NUM_OF_ROWS; ++row) {
+      for (int col = 0; col < NUM_OF_ROWS; ++col) {
+        Square square = board[row][col];
+        if (square.getPiece().getColour() == colour) {
+          pieces.add(square);
+        }
+      }
+    }
+
+    return pieces;
   }
 
 }
