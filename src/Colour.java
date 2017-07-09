@@ -4,10 +4,12 @@ import java.util.function.BiFunction;
  * Created by Anson on 9/7/2017.
  */
 public enum Colour {
-  WHITE((x, y) -> x + y),
-  BLACK((x, y) -> x - y),
-  NONE(null);
 
+  WHITE("White", (x, y) -> x + y),
+  BLACK("Black", (x, y) -> x - y),
+  NONE("", null);
+
+  private final String name;
   private final BiFunction<Integer, Integer, Integer> direction;
   private Colour next;
 
@@ -17,7 +19,8 @@ public enum Colour {
     NONE.next = NONE;
   }
 
-  Colour(BiFunction<Integer, Integer, Integer> direction) {
+  Colour(String name, BiFunction<Integer, Integer, Integer> direction) {
+    this.name = name;
     this.direction = direction;
   }
 
@@ -28,4 +31,10 @@ public enum Colour {
   public BiFunction<Integer, Integer, Integer> getDirection() {
     return direction;
   }
+
+  @Override
+  public String toString() {
+    return name;
+  }
+
 }
