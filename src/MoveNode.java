@@ -65,7 +65,7 @@ public class MoveNode {
     board.applyMove(move);
     Colour next = current.getNext();
 
-    if (board.isFinished()) {
+    if (board.isFinished() != null) {
       node.setScore(board.getResult(original));
     } else {
       Set<Move> validMoves = board.getValidMoves(next);

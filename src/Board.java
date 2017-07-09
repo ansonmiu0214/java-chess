@@ -23,15 +23,15 @@ public class Board {
 
         if (row == 1) {
           // White pawns
-          board[col][row] = new Square(col, row, new Pawn(Colour.WHITE));
+          board[row][col] = new Square(col, row, new Pawn(Colour.WHITE));
 
         } else if (row == 6) {
           // Black pawns
-          board[col][row] = new Square(col, row, new Pawn(Colour.BLACK));
+          board[row][col] = new Square(col, row, new Pawn(Colour.BLACK));
 
         } else {
           // Blank
-          board[col][row] = new Square(col, row, null);
+          board[row][col] = new Square(col, row, null);
         }
 
       }
@@ -97,16 +97,25 @@ public class Board {
             && 0 <= coord_y && coord_y < NUM_OF_ROWS;
   }
 
-  public boolean isFinished() {
-    // TODO implement Board.isFinished()
-    return false;
+  public Colour isFinished() {
+    for (int col = 0; col < NUM_OF_ROWS; ++col) {
+      if (board[0][col].occupiedBy() == Colour.BLACK) {
+        return Colour.BLACK;
+      }
+
+      if (board[7][col].occupiedBy() == Colour.WHITE) {
+        return Colour.WHITE;
+      }
+    }
+
+    return null;
   }
 
   public int getResult(Colour colour) {
     assert(colour != null);
 
-    // TODO implement Board.getResult
-    return 0;
+    Colour winner = isFinished();
+    return (winner == colour) ? 1 : ((winner == null) ? 0 : -1);
   }
 
   public Set<Move> getValidMoves(Colour colour) {
@@ -124,8 +133,10 @@ public class Board {
     for (int row = 0; row < NUM_OF_ROWS; ++row) {
       for (int col = 0; col < NUM_OF_ROWS; ++col) {
         Square square = board[row][col];
-        if (square.getPiece().getColour() == colour) {
-          pieces.add(square);
+        if (square.getPiece() != null) {
+          if (square.getPiece().getColour() == colour) {
+            pieces.add(square);
+          }
         }
       }
     }
@@ -133,4 +144,39 @@ public class Board {
     return pieces;
   }
 
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (int row = 9; row >= -2; --row) {
+      for (int col = -2; col <= 9; ++col) {
+        Square square = getSquare(col, row);
+
+        if ((col == -2 || col == 9) && row >= 0 && row < NUM_OF_ROWS) {
+          sb.append(row + 1);
+        } else if ((row == -2 || row == 9) && col >= 0 && col < NUM_OF_ROWS) {
+          sb.append(String.valueOf(Character.toChars(((int) 'A') + col)));
+        } else if (square != null) {
+
+          if (square.occupiedBy() == null) {
+            sb.append('.');
+          } else if (square.occupiedBy() == Colour.WHITE) {
+            sb.append('W');
+          } else {
+            sb.append('B');
+          }
+
+        } else {
+          sb.append(' ');
+        }
+
+        if (col < 9) {
+          sb.append(" ");
+        }
+      }
+
+      sb.append('\n');
+    }
+
+    return sb.toString();
+  }
 }

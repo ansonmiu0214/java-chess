@@ -38,9 +38,7 @@ public class Square {
   }
 
   public Colour occupiedBy() {
-    assert(piece != null);
-
-    return piece.getColour();
+    return (piece == null) ? null : piece.getColour();
   }
 
   @Override

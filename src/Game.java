@@ -62,13 +62,11 @@ public class Game {
   }
 
   public boolean isFinished() {
-    // TODO implement Game.isFinished
-    return false;
+    return board.isFinished() != null;
   }
 
   public Colour getGameResult() {
-    // TODO implement Game.getGameResult
-    return null;
+    return board.isFinished();
   }
 
   public Move parseMove(String san) {

@@ -36,7 +36,6 @@ public class Player {
   }
 
   public void makeMove() {
-    // TODO implement Player.makeMove
     Move move;
     if (isComputer) {
       // Find optimal moves
@@ -47,6 +46,8 @@ public class Player {
 
 
     } else {
+      // TODO implement Player.makeMove -- user move
+
       // Read standard input
       String san = null;
       // Parse move
