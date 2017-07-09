@@ -43,4 +43,9 @@ public class Square {
     return piece.getColour();
   }
 
+  @Override
+  public String toString() {
+    return "(" + coord_x + ", " + coord_y  + " ) - " + piece.getColour().toString() + " - " + piece.toString();
+  }
+
 }

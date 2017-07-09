@@ -6,8 +6,7 @@ import java.util.function.BiFunction;
 public enum Colour {
 
   WHITE("White", (x, y) -> x + y),
-  BLACK("Black", (x, y) -> x - y),
-  NONE("", null);
+  BLACK("Black", (x, y) -> x - y);
 
   private final String name;
   private final BiFunction<Integer, Integer, Integer> direction;
@@ -16,7 +15,6 @@ public enum Colour {
   static {
     WHITE.next = BLACK;
     BLACK.next = WHITE;
-    NONE.next = NONE;
   }
 
   Colour(String name, BiFunction<Integer, Integer, Integer> direction) {

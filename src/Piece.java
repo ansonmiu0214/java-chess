@@ -8,7 +8,7 @@ public abstract class Piece {
   private final Colour colour;
 
   public Piece(Colour colour) {
-    assert(colour != Colour.NONE);
+    assert(colour != null);
     this.colour = colour;
   }
 
@@ -16,6 +16,6 @@ public abstract class Piece {
     return colour;
   }
 
-  public abstract Set<Move> getValidMoves();
+  public abstract Set<Move> getValidMoves(Board board, Square current);
 
 }
