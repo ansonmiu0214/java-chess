@@ -1,4 +1,6 @@
 import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -35,6 +37,25 @@ public class Player {
 
   public void makeMove() {
     // TODO implement Player.makeMove
+    Move move;
+    if (isComputer) {
+      // Find optimal moves
+      MoveNode tree = new MoveNode(game.getBoard(), colour);
+      List<Move> optimal = tree.getOptimal();
+
+      move = optimal.get((int) (Math.random() * (optimal.size() - 1)));
+
+
+    } else {
+      // Read standard input
+      String san = null;
+      // Parse move
+
+      move = game.parseMove(san);
+    }
+
+    game.applyMove(move);
+
   }
 
 }

@@ -7,7 +7,9 @@ import java.util.stream.Collectors;
  */
 public class Board {
 
-  public static final int NUM_OF_ROWS = 8;
+  public static final int PAWN_WHITE = 1;
+  public static final int PAWN_BLACK = 6;
+  static final int NUM_OF_ROWS = 8;
 
   private final Square[][] board;
 
@@ -38,22 +40,59 @@ public class Board {
   }
 
   public Square getSquare(int coord_x, int coord_y) {
-    return board[coord_y][coord_x];
+    return (isInBound(coord_x, coord_y)) ? board[coord_y][coord_x] : null;
   }
 
   public void applyMove(Move move) {
     assert(move != null);
 
-    // TODO implement Board.applyMove
+    Square from = move.getFrom();
+    Square to = move.getTo();
+
+    if (move.isCastle()) {
+
+      // TODO implement Board.applyMove -- isCastle
+
+    } else {
+      // Move pieces
+
+      to.setPiece(from.getPiece());
+      from.clearPiece();
+
+      if (move.isEnPassant()) {
+        // TODO implement Board.applyMove -- isEnPassant
+      }
+    }
   }
 
   public void unapplyMove(Move move) {
     assert(move != null);
 
-    // TODO implement Board.unapplyMove
+    Square from = move.getFrom();
+    Square to = move.getTo();
+
+    if (move.isCastle()) {
+
+      // TODO implement Board.unapplyMove -- isCastle
+
+    } else {
+      // Move pieces
+
+      if (move.isCapture()) {
+        // Restore piece
+        Piece piece = move.getPiece();
+
+        // TODO implement Board.unapplyMove -- isCapture
+
+        if (move.isEnPassant()) {
+          // TODO implement Board.unapplyMove -- isEnPassant
+        }
+
+      }
+    }
   }
 
-  public boolean isInBound(int coord_x, int coord_y) {
+  private boolean isInBound(int coord_x, int coord_y) {
     return 0 <= coord_x && coord_x < NUM_OF_ROWS
             && 0 <= coord_y && coord_y < NUM_OF_ROWS;
   }

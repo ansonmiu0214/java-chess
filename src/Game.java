@@ -32,48 +32,27 @@ public class Game {
   public void applyMove(Move move) {
     assert(move != null);
 
-    // TODO optimise code for Game.applyMove
-
-    Square from = move.getFrom();
-    Square to = move.getTo();
-
-    if (move.isCastle()) {
-      // TODO implement Game.applyMove -- isCastle
-    } else if (move.isCapture()) {
-
-      to.setPiece(from.getPiece());
-      from.clearPiece();
-
-      if (move.isEnPassant()) {
-        // TODO implement Game.applyMove -- isEnPassant
-
-      }
-    } else {
-      // Normal movement
-
-      to.setPiece(from.getPiece());
-      from.clearPiece();
-
-    }
+    // Apply move on board
+    board.applyMove(move);
 
     // Add move to history stack
     history.push(move);
 
     // Next colour
     current = current.getNext();
-
-    // TODO implement Game.applyMove
   }
 
   public void unapplyMove() {
     Move move = getLastMove();
 
+    // Move validation
     if (move == null) {
       System.err.println("No more moves to unapply");
       return;
     }
 
-    // TODO implement Game.unapplyMove
+    // Unapply move on board
+    board.unapplyMove(move);
 
     // Indicate next player
     current = current.getNext();

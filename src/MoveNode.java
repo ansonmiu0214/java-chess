@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,7 +42,7 @@ public class MoveNode {
     this.score = score;
   }
 
-  public Set<Move> getOptimal() {
+  public List<Move> getOptimal() {
 
     Set<Move> validMoves = board.getValidMoves(current);
     Set<MoveNode> options = new HashSet<>();
@@ -52,7 +53,10 @@ public class MoveNode {
 
     setScore(options.stream().map(MoveNode::getScore).reduce(0, Math::max));
 
-    return options.stream().filter(x -> x.getScore() == score).map(MoveNode::getMove).collect(Collectors.toSet());
+    return options.stream()
+            .filter(x -> x.getScore() == score)
+            .map(MoveNode::getMove)
+            .collect(Collectors.toList());
   }
 
   private MoveNode explore(Move move, Board board, Colour original, Colour current) {
